@@ -1,3 +1,3 @@
 Executing tests
 
-npx cypress run
+npx cypress open
