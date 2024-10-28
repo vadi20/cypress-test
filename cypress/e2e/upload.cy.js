@@ -7,6 +7,14 @@ describe('File Upload Validation', () => {
     cy.visit('https://the-internet.herokuapp.com/upload');
   });
 
+  it('Test scenario to chect if input exists ', () => {
+    cy.log("Check if input feilds exists");
+    cy.get('#file-upload').should('exist');
+    cy.get('#drag-drop-upload').should('exist');
+    cy.get('#file-submit').should('exist');
+  })
+
+
   it('should display an error for unsupported file type (.exe) for manual upload', () => {
 
     cy.log("Upload a exe file using file upload option");
@@ -39,7 +47,6 @@ describe('File Upload Validation', () => {
   });
 
   it('should display an error for large file size (10MB) for manual upload', () => {
-    
     cy.log("Upload a large file using file upload option");
     cy.get('#file-upload')
       .selectFile(largeFilePath)
