@@ -16,19 +16,34 @@ describe('Personal Loan Calculator Functionality', () => {
       cy.get('#personal-loan').click();
   
       cy.log('Move "Personal Loan Amount" slider to 10L (1,000,000)');
-      cy.get('#loanamountslider .ui-slider-handle').invoke('attr', 'style', 'left: 33.34%;').trigger("mousedown", { which: 1 , force: true}); 
+      cy.get('#loanamountslider > .ui-slider-handle').invoke('attr', 'style', 'left: 33.34%;')
+      .trigger('mouseover')
+      .trigger('mousedown', {which: 1})
+      .trigger('mousemove')
+      .trigger('mouseup', {force: true});
+
       cy.wait(500);
       cy.get('#loanamount').should('have.value', '10,00,000'); 
 
   
       cy.log('Move "Interest Rate" slider to 12%');
-      cy.get('#loaninterestslider .ui-slider-handle').invoke('attr', 'style', 'left: 35%;').trigger("mousedown", { which: 1, force: true }); 
+      cy.get('#loaninterestslider > .ui-slider-handle').invoke('attr', 'style', 'left: 35%;').trigger('mouseover')
+      .trigger('mousedown', {which: 1})
+      .trigger('mousemove')
+      .trigger('mouseup', {force: true});
+
       cy.wait(500);
-  
+      cy.get('#loaninterest').should('have.value', '12'); 
+
       cy.log(' Move "Loan Tenure" slider to 5 years');
-      cy.get('#loantermslider .ui-slider-handle').invoke('attr', 'style', 'left: 100%;').trigger("mousedown", { which: 1, force: true }); 
+      cy.get('#loantermslider > .ui-slider-handle').invoke('attr', 'style', 'left: 100%;').trigger('mouseover')
+      .trigger('mousedown', {which: 1})
+      .trigger('mousemove')
+      .trigger('mouseup', {force: true});
+ 
       cy.wait(500);
-  
+      cy.get('#loanterm').should('have.value', '5'); 
+
       cy.log(' Step 4: Change the Month from "Schedule showing EMI payments starting from" calendar widget');
       cy.get('#startmonthyear').click(); 
       cy.get('.datepicker-months tbody tr td').contains('Nov').click(); 
